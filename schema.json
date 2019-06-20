@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pipeline Message",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "integer",
+      "enum": [
+        0
+      ]
+    },
+    "producer_id": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "product": {
+      "type": "string"
+    },
+    "team": {
+      "type": "string"
+    },
+    "service": {
+      "type": "string"
+    },
+    "vertical": {
+      "type": "string",
+      "enum": [
+        "is24",
+        "as24",
+        "s24"
+      ]
+    },
+    "log_level": {
+      "type": "string",
+      "enum": [
+        "trace",
+        "debug",
+        "info",
+        "warn",
+        "error",
+        "fatal"
+      ]
+    },
+    "log_msg": {
+      "type": "string"
+    },
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "value"
+        ]
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "COUNTER",
+              "GAUGE"
+            ]
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "value",
+          "type"
+        ]
+      }
+    }
+  },
+  "required": [
+    "version",
+    "producer_id",
+    "timestamp",
+    "product",
+    "team",
+    "service",
+    "vertical",
+    "log_level",
+    "log_msg",
+    "fields",
+    "metrics"
+  ],
+  "additionalProperties": false
+}

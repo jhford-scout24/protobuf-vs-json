@@ -1,0 +1,52 @@
+syntax = "proto3";
+package pipeline_msg;
+
+import "google/protobuf/timestamp.proto";
+
+message ProtobufPipelineMessage {
+    int32 version = 1;
+    string producer_id = 2;
+    google.protobuf.Timestamp timestamp = 3;
+    string product = 4;
+    string team = 5;
+    string service = 6;
+
+    enum Vertical {
+        is24 = 0;
+        as24 = 1;
+        s24 = 2;
+    }
+
+    Vertical vertical = 7;
+
+    enum LogLevel {
+        TRACE = 0;
+        DEBUG = 1;
+        INFO = 2;
+        WARN = 3;
+        ERROR = 4;
+        FATAL = 5;
+    }
+
+    LogLevel log_level = 8;
+
+    string log_msg = 9;
+
+    message Field {
+        string key = 1;
+        string value = 2;
+    }
+
+    repeated Field fields = 10;
+
+    enum MetricType {
+        COUNTER = 0;
+        GAUGE = 1;
+    }
+
+    message Metric {
+        string key = 1;
+        double value = 2;
+        MetricType type = 3;
+    }
+}
