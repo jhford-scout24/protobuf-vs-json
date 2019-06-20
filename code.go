@@ -2,11 +2,11 @@ package pipeline_msg
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/golang/protobuf/proto"
 	"github.com/qri-io/jsonschema"
 	"io/ioutil"
 	"os"
+	"strings"
 )
 
 type Tester struct {
@@ -67,9 +67,20 @@ func (t *Tester) SerialiseJSON(message *PipelineMessage) []byte {
 	return out
 }
 
-func (t *Tester) ValidateJSON(buf []byte) []byte {
+func (t *Tester) ParseValidateJSON(buf []byte) []byte {
+	var doc interface{}
+	errors := []jsonschema.ValError{}
+
+	doc = t.ParseJSON(buf)
+
+	t.rs.Validate("/", doc, &errors)
+
 	if errors, _ := t.rs.ValidateBytes(buf); len(errors) > 0 {
-		panic(fmt.Sprintf("%v", errors))
+		var errorMsg strings.Builder
+		for _, error := range errors {
+			errorMsg.WriteString(error.Error())
+		}
+		panic(errorMsg)
 	}
 
 	return buf

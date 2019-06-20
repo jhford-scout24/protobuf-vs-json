@@ -28,16 +28,25 @@ go test -bench=. -v ./...
 
 ## Example
 ```
-go test -bench=. -test.benchmem
+go test -bench=. -test.benchmem -test.benchtime=5s -v
+=== RUN   TestSerialisedSizes
+=== RUN   TestSerialisedSizes/PROTOBUF:_138_bytes
+=== RUN   TestSerialisedSizes/JSON:_____378_bytes
+=== RUN   TestSerialisedSizes/EMPTY_PROTOBUF:_6_bytes
+=== RUN   TestSerialisedSizes/EMPTY_JSON:_____211_bytes
+--- PASS: TestSerialisedSizes (0.00s)
+    --- PASS: TestSerialisedSizes/PROTOBUF:_138_bytes (0.00s)
+    --- PASS: TestSerialisedSizes/JSON:_____378_bytes (0.00s)
+    --- PASS: TestSerialisedSizes/EMPTY_PROTOBUF:_6_bytes (0.00s)
+    --- PASS: TestSerialisedSizes/EMPTY_JSON:_____211_bytes (0.00s)
 goos: darwin
 goarch: amd64
 pkg: github.com/Scout24/protobuf-vs-json
-BenchmarkTester_SerialiseProtobuf-8   	 3000000	       513 ns/op	806593271.99 MB/s	     144 B/op	       1 allocs/op
-BenchmarkTester_SerialiseJSON-8       	 1000000	      1839 ns/op	164147781.65 MB/s	     464 B/op	       4 allocs/op
-BenchmarkTester_ParseProtobuf-8       	 2000000	       772 ns/op	357396783.61 MB/s	     504 B/op	      15 allocs/op
-BenchmarkTester_ParseValidateJSON-8   	   50000	     32521 ns/op	581144.78 MB/s	    6753 B/op	     216 allocs/op
-BenchmarkTester_ParseJSON-8           	  200000	      6894 ns/op	10964482.48 MB/s	     895 B/op	      21 allocs/op
-BenchmarkTester_ValidateJSON-8        	   50000	     24572 ns/op	769133.76 MB/s	    5841 B/op	     194 allocs/op
+BenchmarkTester_SerialiseProtobuf-8   	20000000	       514 ns/op	5359273037.11 MB/s	     144 B/op	       1 allocs/op
+BenchmarkTester_SerialiseJSON-8       	 5000000	      1834 ns/op	823149495.01 MB/s	     464 B/op	       4 allocs/op
+BenchmarkTester_ParseProtobuf-8       	10000000	       783 ns/op	1761835970.23 MB/s	     504 B/op	      15 allocs/op
+BenchmarkTester_ParseValidateJSON-8   	  200000	     34116 ns/op	2215920.31 MB/s	    6929 B/op	     222 allocs/op
+BenchmarkTester_ParseJSON-8           	 1000000	      7081 ns/op	53380892.97 MB/s	     896 B/op	      21 allocs/op
 PASS
-ok  	github.com/Scout24/protobuf-vs-json	11.157s
+ok  	github.com/Scout24/protobuf-vs-json	44.850s
 ```

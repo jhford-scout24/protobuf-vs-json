@@ -130,7 +130,7 @@ func BenchmarkTester_ParseProtobuf(b *testing.B) {
 func BenchmarkTester_ParseValidateJSON(b *testing.B) {
 	var size int
 	for i := 1; i < b.N; i++ {
-		tester.ParseJSON(tester.ValidateJSON(validJSON))
+		tester.ParseValidateJSON(validJSON)
 		size += len(validJSON)
 	}
 	b.SetBytes(int64(size))
@@ -145,11 +145,3 @@ func BenchmarkTester_ParseJSON(b *testing.B) {
 	b.SetBytes(int64(size))
 }
 
-func BenchmarkTester_ValidateJSON(b *testing.B) {
-	var size int
-	for i := 1; i < b.N; i++ {
-		tester.ValidateJSON(validJSON)
-		size += len(validJSON)
-	}
-	b.SetBytes(int64(size))
-}
