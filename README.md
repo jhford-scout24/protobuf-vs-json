@@ -23,26 +23,30 @@ brew install go protobuf protoc-gen-go
 ```
 
 ```bash
-go test -bench=.
+go test -bench=. -v ./...
 ```
 
-EXAMPLE:
+## Example
 ```
 === RUN   TestSerialisedSizes
 === RUN   TestSerialisedSizes/PROTOBUF:_138_bytes
 === RUN   TestSerialisedSizes/JSON:_____378_bytes
+=== RUN   TestSerialisedSizes/EMPTY_PROTOBUF:_6_bytes
+=== RUN   TestSerialisedSizes/EMPTY_JSON:_____211_bytes
 --- PASS: TestSerialisedSizes (0.00s)
     --- PASS: TestSerialisedSizes/PROTOBUF:_138_bytes (0.00s)
     --- PASS: TestSerialisedSizes/JSON:_____378_bytes (0.00s)
+    --- PASS: TestSerialisedSizes/EMPTY_PROTOBUF:_6_bytes (0.00s)
+    --- PASS: TestSerialisedSizes/EMPTY_JSON:_____211_bytes (0.00s)
 goos: darwin
 goarch: amd64
 pkg: github.com/Scout24/protobuf-vs-json
-BenchmarkTester_SerialiseProtobuf-8   	 3000000	       518 ns/op	 266.35 MB/s
-BenchmarkTester_SerialiseJSON-8       	 1000000	      1854 ns/op	 162.87 MB/s
-BenchmarkTester_ParseProtobuf-8       	 2000000	       780 ns/op	 176.82 MB/s
-BenchmarkTester_ParseValidateJSON-8   	   50000	     33001 ns/op	  11.45 MB/s
-BenchmarkTester_ParseJSON-8           	  200000	      7031 ns/op	  53.76 MB/s
-BenchmarkTester_ValidateJSON-8        	   50000	     25360 ns/op	  14.90 MB/s
+BenchmarkTester_SerialiseProtobuf-8   	 3000000	       511 ns/op	 269.78 MB/s
+BenchmarkTester_SerialiseJSON-8       	 1000000	      1813 ns/op	 166.56 MB/s
+BenchmarkTester_ParseProtobuf-8       	 2000000	       768 ns/op	 179.57 MB/s
+BenchmarkTester_ParseValidateJSON-8   	   50000	     32933 ns/op	  11.48 MB/s
+BenchmarkTester_ParseJSON-8           	  200000	      6891 ns/op	  54.85 MB/s
+BenchmarkTester_ValidateJSON-8        	   50000	     24668 ns/op	  15.32 MB/s
 PASS
-ok  	github.com/Scout24/protobuf-vs-json	11.331s
+ok  	github.com/Scout24/protobuf-vs-json	11.139s
 ```

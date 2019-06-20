@@ -33,6 +33,20 @@ var validProtobuf = &ProtobufPipelineMessage{
 	},
 }
 
+var emptyProtobuf = &ProtobufPipelineMessage{
+	Version:    0,
+	ProducerId: "",
+	Timestamp: &timestamp.Timestamp{
+		Seconds: 0,
+	},
+	Product:  "",
+	Team:     "",
+	Service:  "",
+	Vertical: ProtobufPipelineMessage_s24,
+	LogLevel: ProtobufPipelineMessage_INFO,
+	LogMsg:   "",
+}
+
 var validJSON = []byte(`{
 	"version": 0,
 	"producer_id": "testing-producer-01",
@@ -50,12 +64,32 @@ var validJSON = []byte(`{
 	"metrics": []
 }`)
 
+var emptyJSON = []byte(`{
+	"version": 0,
+	"producer_id": "",
+	"timestamp": "2008-09-15T15:53:00+05:00",
+	"product": "",
+	"team": "",
+	"service": "",
+	"vertical": "",
+	"log_level": "info",
+	"log_msg": "",
+	"fields": [],
+	"metrics": []
+}`)
+
 func TestSerialisedSizes(t *testing.T) {
 	protoSize := len(tester.SerialiseProtobuf(validProtobuf))
 	jsonSize := len(validJSON)
 
+	emptyProtoSize := len(tester.SerialiseProtobuf(emptyProtobuf))
+	emptyJsonSize := len(emptyJSON)
+
 	t.Run(fmt.Sprintf("PROTOBUF: %d bytes", protoSize), func(t *testing.T) {})
 	t.Run(fmt.Sprintf("JSON:     %d bytes", jsonSize), func(t *testing.T) {})
+
+	t.Run(fmt.Sprintf("EMPTY PROTOBUF: %d bytes", emptyProtoSize), func(t *testing.T) {})
+	t.Run(fmt.Sprintf("EMPTY JSON:     %d bytes", emptyJsonSize), func(t *testing.T) {})
 }
 
 func BenchmarkTester_SerialiseProtobuf(b *testing.B) {
