@@ -28,25 +28,16 @@ go test -bench=. -v ./...
 
 ## Example
 ```
-=== RUN   TestSerialisedSizes
-=== RUN   TestSerialisedSizes/PROTOBUF:_138_bytes
-=== RUN   TestSerialisedSizes/JSON:_____378_bytes
-=== RUN   TestSerialisedSizes/EMPTY_PROTOBUF:_6_bytes
-=== RUN   TestSerialisedSizes/EMPTY_JSON:_____211_bytes
---- PASS: TestSerialisedSizes (0.00s)
-    --- PASS: TestSerialisedSizes/PROTOBUF:_138_bytes (0.00s)
-    --- PASS: TestSerialisedSizes/JSON:_____378_bytes (0.00s)
-    --- PASS: TestSerialisedSizes/EMPTY_PROTOBUF:_6_bytes (0.00s)
-    --- PASS: TestSerialisedSizes/EMPTY_JSON:_____211_bytes (0.00s)
+go test -bench=. -test.benchmem
 goos: darwin
 goarch: amd64
 pkg: github.com/Scout24/protobuf-vs-json
-BenchmarkTester_SerialiseProtobuf-8   	 3000000	       511 ns/op	 269.78 MB/s
-BenchmarkTester_SerialiseJSON-8       	 1000000	      1813 ns/op	 166.56 MB/s
-BenchmarkTester_ParseProtobuf-8       	 2000000	       768 ns/op	 179.57 MB/s
-BenchmarkTester_ParseValidateJSON-8   	   50000	     32933 ns/op	  11.48 MB/s
-BenchmarkTester_ParseJSON-8           	  200000	      6891 ns/op	  54.85 MB/s
-BenchmarkTester_ValidateJSON-8        	   50000	     24668 ns/op	  15.32 MB/s
+BenchmarkTester_SerialiseProtobuf-8   	 3000000	       513 ns/op	806593271.99 MB/s	     144 B/op	       1 allocs/op
+BenchmarkTester_SerialiseJSON-8       	 1000000	      1839 ns/op	164147781.65 MB/s	     464 B/op	       4 allocs/op
+BenchmarkTester_ParseProtobuf-8       	 2000000	       772 ns/op	357396783.61 MB/s	     504 B/op	      15 allocs/op
+BenchmarkTester_ParseValidateJSON-8   	   50000	     32521 ns/op	581144.78 MB/s	    6753 B/op	     216 allocs/op
+BenchmarkTester_ParseJSON-8           	  200000	      6894 ns/op	10964482.48 MB/s	     895 B/op	      21 allocs/op
+BenchmarkTester_ValidateJSON-8        	   50000	     24572 ns/op	769133.76 MB/s	    5841 B/op	     194 allocs/op
 PASS
-ok  	github.com/Scout24/protobuf-vs-json	11.139s
+ok  	github.com/Scout24/protobuf-vs-json	11.157s
 ```

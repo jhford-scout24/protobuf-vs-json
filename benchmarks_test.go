@@ -93,51 +93,63 @@ func TestSerialisedSizes(t *testing.T) {
 }
 
 func BenchmarkTester_SerialiseProtobuf(b *testing.B) {
+	var size int
 	for i := 1; i < b.N; i++ {
 		result := tester.SerialiseProtobuf(validProtobuf)
-		b.SetBytes(int64(len(result)))
+		size += len(result)
 	}
+	b.SetBytes(int64(size))
 }
 
 func BenchmarkTester_SerialiseJSON(b *testing.B) {
 	b.StopTimer()
 	example := tester.ParseJSON(validJSON)
+	var size int
 	b.ResetTimer()
 	b.StartTimer()
 	for i := 1; i < b.N; i++ {
 		result := tester.SerialiseJSON(example)
-		b.SetBytes(int64(len(result)))
+		size += len(result)
 	}
+	b.SetBytes(int64(size))
 }
 
 func BenchmarkTester_ParseProtobuf(b *testing.B) {
 	b.StopTimer()
 	buf := tester.SerialiseProtobuf(validProtobuf)
+	var size int
 	b.ResetTimer()
 	b.StartTimer()
 	for i := 1; i < b.N; i++ {
 		tester.ParseProtobuf(buf)
-		b.SetBytes(int64(len(buf)))
+		size += len(buf)
 	}
+	b.SetBytes(int64(size))
 }
 
 func BenchmarkTester_ParseValidateJSON(b *testing.B) {
+	var size int
 	for i := 1; i < b.N; i++ {
 		tester.ParseJSON(tester.ValidateJSON(validJSON))
-		b.SetBytes(int64(len(validJSON)))
+		size += len(validJSON)
 	}
+	b.SetBytes(int64(size))
 }
 
 func BenchmarkTester_ParseJSON(b *testing.B) {
+	var size int
 	for i := 1; i < b.N; i++ {
 		tester.ParseJSON(validJSON)
-		b.SetBytes(int64(len(validJSON)))
+		size += len(validJSON)
 	}
+	b.SetBytes(int64(size))
 }
 
 func BenchmarkTester_ValidateJSON(b *testing.B) {
+	var size int
 	for i := 1; i < b.N; i++ {
 		tester.ValidateJSON(validJSON)
-		b.SetBytes(int64(len(validJSON)))
+		size += len(validJSON)
 	}
+	b.SetBytes(int64(size))
 }
