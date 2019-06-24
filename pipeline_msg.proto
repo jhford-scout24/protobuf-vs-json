@@ -49,4 +49,6 @@ message ProtobufPipelineMessage {
         double value = 2;
         MetricType type = 3;
     }
+
+    repeated Metric metrics = 11;
 }

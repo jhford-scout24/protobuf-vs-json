@@ -4,7 +4,7 @@ import "time"
 
 type (
 	PipelineMessage struct {
-		Fields []Var `json:"fields,omitempty"`
+		Fields []Var `json:"fields"`
 
 		// Possible values:
 		//   * "trace"
@@ -13,31 +13,31 @@ type (
 		//   * "warn"
 		//   * "error"
 		//   * "fatal"
-		Log_Level string `json:"log_level,omitempty"`
+		Log_Level string `json:"log_level"`
 
-		Log_Msg string `json:"log_msg,omitempty"`
+		Log_Msg string `json:"log_msg"`
 
-		Metric []Var1 `json:"metric,omitempty"`
+		Metrics []Var1 `json:"metrics"`
 
-		Producer_ID string `json:"producer_id,omitempty"`
+		Producer_ID string `json:"producer_id"`
 
-		Product string `json:"product,omitempty"`
+		Product string `json:"product"`
 
-		Service string `json:"service,omitempty"`
+		Service string `json:"service"`
 
-		Team string `json:"team,omitempty"`
+		Team string `json:"team"`
 
-		Timestamp time.Time `json:"timestamp,omitempty"`
+		Timestamp time.Time `json:"timestamp"`
 
 		// Possible values:
 		//   * 0
-		Version int64 `json:"version,omitempty"`
+		Version int64 `json:"version"`
 
 		// Possible values:
 		//   * "is24"
 		//   * "as24"
 		//   * "s24"
-		Vertical string `json:"vertical,omitempty"`
+		Vertical string `json:"vertical"`
 	}
 
 	Var struct {

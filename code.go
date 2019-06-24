@@ -79,8 +79,9 @@ func (t *Tester) ParseValidateJSON(buf []byte) []byte {
 		var errorMsg strings.Builder
 		for _, error := range errors {
 			errorMsg.WriteString(error.Error())
+			errorMsg.WriteRune('|')
 		}
-		panic(errorMsg)
+		panic(errorMsg.String())
 	}
 
 	return buf
